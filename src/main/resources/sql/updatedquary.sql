@@ -1,50 +1,62 @@
-CREATE TABLE doctor (
+
+
+CREATE TABLE users (
+                         id INT AUTO_INCREMENT PRIMARY KEY,
+                         firstname VARCHAR(255) not null ,
+                         lastname VARCHAR(255) not null ,
+                         email VARCHAR(255) unique not null,
+                         password VARCHAR(48) not null ,
+                         role VARCHAR(20)
+);
+
+
+CREATE TABLE doctors (
                         id INT AUTO_INCREMENT PRIMARY KEY,
                         name VARCHAR(255) not null ,
                         bmdc_no VARCHAR(20) unique not null
 );
 
-CREATE TABLE patient (
+CREATE TABLE patients (
                          id INT AUTO_INCREMENT PRIMARY KEY,
                          name VARCHAR(255) not null ,
                          phone VARCHAR(20) unique not null
 );
 
-CREATE TABLE generic (
+CREATE TABLE generics (
                          id INT AUTO_INCREMENT PRIMARY KEY,
                          name VARCHAR(255) unique not null
 
 );
 
-CREATE TABLE vendor (
+CREATE TABLE vendors (
                         id INT AUTO_INCREMENT PRIMARY KEY,
                         name VARCHAR(255) not null
 );
 
 
-CREATE TABLE brand (
+CREATE TABLE drugs (
                       id INT AUTO_INCREMENT PRIMARY KEY,
                       name VARCHAR(255) not null ,
                       description TEXT,
                       generic_id INT,
                       vendor_id INT,
-                      FOREIGN KEY (generic_id) REFERENCES generic(id),
-                      FOREIGN KEY (vendor_id) REFERENCES vendor(id)
+                      FOREIGN KEY (generic_id) REFERENCES generics(id),
+                      FOREIGN KEY (vendor_id) REFERENCES vendors(id)
 );
 
-CREATE TABLE prescription (
+CREATE TABLE prescriptions (
                               id INT AUTO_INCREMENT PRIMARY KEY,
-                              patient_id INT,
                               doctor_id INT,
+                              patient_id INT,
                               location_id INT,
-                              FOREIGN KEY (patient_id) REFERENCES patient(id),
-                              FOREIGN KEY (doctor_id) REFERENCES doctor(id),
-                              FOREIGN KEY (location_id) REFERENCES location(id)
+                              FOREIGN KEY (doctor_id) REFERENCES doctors(id),
+                              FOREIGN KEY (patient_id) REFERENCES patients(id),
+                              FOREIGN KEY (location_id) REFERENCES locations(id)
 );
 
 
 
-CREATE TABLE location (
+CREATE TABLE locations (
                           id INT AUTO_INCREMENT PRIMARY KEY,
                           name VARCHAR(255) unique not null ,
                           latitude DOUBLE unique not null ,
@@ -54,21 +66,15 @@ CREATE TABLE location (
 
 
 
-CREATE TABLE prescription_brand (
-                                    brand_id INT,
+CREATE TABLE prescription_drugs (   id INT AUTO_INCREMENT PRIMARY KEY,
                                     prescription_id INT,
-                                   PRIMARY KEY (prescription_id, brand_id),
-                                   FOREIGN KEY (prescription_id) REFERENCES prescription(id),
-                                   FOREIGN KEY (brand_id) REFERENCES brand (id)
+                                    drug_id INT,
+
+                                   FOREIGN KEY (prescription_id) REFERENCES prescriptions(id),
+                                   FOREIGN KEY (drug_id) REFERENCES drugs(id)
 );
 
-CREATE TABLE brand_prescription (
-                                    brand_id    BIGINT NOT NULL,
-                                    prescription_id BIGINT NOT NULL,
-                                    CONSTRAINT pk_brand_prescription PRIMARY KEY (brand_id, prescription_id),
-                                    CONSTRAINT fk_brand_id FOREIGN KEY (brand_id) REFERENCES brand(id),
-                                    CONSTRAINT fk_prescription_id FOREIGN KEY (prescription_id) REFERENCES prescription(id)
-);
+
 
 
 INSERT INTO locations (location_name, latitude, longitude) VALUES
@@ -120,7 +126,7 @@ INSERT INTO vendors (name) VALUES
 
 
 
-INSERT INTO doctors (name, bmdc_no) VALUES
+INSERT INTO doctors (name, doctor_bmdc) VALUES
                                     ('Dr. Ashraful Islam', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000),
                                     ('Dr. Zahid Hossain', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000),
                                     ('Dr. Omar Ahmed', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000),
@@ -156,64 +162,41 @@ VALUES
     ('Ava Cruz', '08529637410');
 
 
-INSERT INTO prescription (patient_id, doctor_id, location_id)
+INSERT INTO prescriptions (doctor_id, patient_id, location_id)
 VALUES
-    (2419, 1),
-    (2419, 1),
-    (2419, 1),
-    (2419, 1),
-    (2419, 1),
-    (2419, 1),
-    (2419, 1),
-    (2419, 1),
-    (2419, 1),
-    (2419, 1);
+    (1, 1, 1),
+    (2, 3, 1),
+    (4, 2, 1),
+    (3, 5, 2),
+    (7, 6, 2),
+    (3, 10, 2),
+    (5, 8, 3),
+    (1, 11, 3);
 
-INSERT INTO brands (brand_name,description,vendor_id, generic_id) VALUES
-                                                                     ('Indever', NULL, 1, NULL),
-                                                                     ('Abetis', NULL, 1, NULL),
-                                                                     ('Feglo-FZ', NULL, 1, NULL),
-                                                                     ('Cora-DX', NULL, 1, NULL),
-                                                                     ('Acical-D', NULL, 1, NULL),
-                                                                     ('Reversair', NULL,  1, NULL),
-                                                                     ('Xeldrin', NULL, 1, NULL),
-                                                                     ('Artica', NULL, 1, NULL),
-                                                                     ('Hexisol', NULL,  1, NULL),
-                                                                     ('Paricel', NULL,  1, NULL),
-                                                                     ('Gabarol-CR', NULL, 1, NULL),
-                                                                     ('Atasin', NULL, 1, NULL),
-                                                                     ('Micoral-Gel', NULL, 1, NULL);
 
-INSERT INTO prescription (patient_id,doctor_id,location_id)
-VALUES (1, 1,1 ),
-       (1, 1,1),
-       (1, 1,1),
-       (1, 1,1),
-       (1, 1,1),
-       (1, 1,1),
-       (1, 1,1),
-       (1, 1,1),
-       (1, 1,1);
 
-INSERT INTO prescription_brand (brand_id, prescription_id) VALUES
-                                                               (1,1),
-                                                               (2,1),
-                                                               (3,1),
-                                                               (4,1);
+INSERT INTO drugs (drug_name, description, vendor_id, generic_id) VALUES
+                                                                     ('Indever', n/a, 1, 1),
+                                                                     ('Abetis', n/a, 1, 1),
+                                                                     ('Feglo-FZ', n/a, 1, 1),
+                                                                     ('Cora-DX', n/a, 1, 1),
+                                                                     ('Acical-D', n/a, 2, 2),
+                                                                     ('Reversair', n/a, 2, 2),
+                                                                     ('Xeldrin', n/a, 2, 2),
+                                                                     ('Artica', n/a, 3, 3),
+                                                                     ('Hexisol', n/a, 3, 3),
+                                                                     ('Paricel', n/a, 3, 3),
+                                                                     ('Gabarol-CR', n/a, 4, 4),
+                                                                     ('Atasin', n/a, 4, 4),
+                                                                     ('Micoral-Gel', n/a, 4, 4);
 
 
 
 
-select count(*) from prescription_brand join prescription on prescription_brand.prescription_id = prescription.id
-where brand_id = 1 and location_id = 1;
 
 
-@Query(value = "SELECT b.brand_name, l.location_name, l.latitude, l.longitude, COUNT(*) " +
-               "FROM prescriptions p " +
-               "JOIN prescription_brands pb ON p.id = pb.prescription_id " +
-               "JOIN brands b ON pb.brand_id = b.id " +
-               "JOIN locations l ON p.location_id = l.id " +
-               "WHERE b.id = ?1 AND l.id = ?2 " +
-               "GROUP BY b.brand_name, l.location_name, l.latitude, l.longitude",
-       nativeQuery = true)
 
+
+
+/*    @Query("SELECT COUNT(p) FROM Prescription p JOIN p.drugs d JOIN p.location l WHERE d.drugName LIKE %:drugName% AND l.locationName LIKE %:locationName%")
+    Long countPrescriptionsByDrugNameAndLocationName(@Param("drugName") String drugName, @Param("locationName") String locationName);*/
