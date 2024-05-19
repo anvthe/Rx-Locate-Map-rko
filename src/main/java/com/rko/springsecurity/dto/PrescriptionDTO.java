@@ -10,8 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PrescriptionDTO {
+    private Long id;
     private DoctorDTO doctor;
     private PatientDTO patient;
-    private LocationDTO location;
     private List<DrugDTO> drugs;
 }

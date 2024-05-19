@@ -29,8 +29,8 @@ public class Location {
   /*  @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<Prescription> prescriptions;*/
 
-    @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
-    private Set<Prescription> prescriptions;
+   /* @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
+    private Set<Prescription> prescriptions;*/
 
     // Constructors, getters, and setters
 }

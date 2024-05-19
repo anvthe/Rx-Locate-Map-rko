@@ -1,15 +1,16 @@
 package com.rko.springsecurity.service;
 
+import com.rko.springsecurity.domain.Prescription;
+import com.rko.springsecurity.dto.LocationDTO;
 import com.rko.springsecurity.dto.PrescriptionDTO;
-import com.rko.springsecurity.dto.PrescriptionRxDTO;
-//import com.rko.springsecurity.mapper.PrescriptionMapper;
+import com.rko.springsecurity.mapper.PrescriptionMapper;
 import com.rko.springsecurity.repository.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class PrescriptionService {
@@ -25,18 +26,15 @@ public class PrescriptionService {
     }
 
 
-  /*  public List<PrescriptionDTO> searchPrescriptionsByArea(String locationName) {
-        return prescriptionRepository.findByLocationName(locationName)
-                .stream()
-                .map(PrescriptionMapper::toDTO)
-                .collect(Collectors.toList());
-    }*/
-
-    public List<PrescriptionRxDTO> getPrescriptionSummariesByLocation(String locationName) {
+    public List<LocationDTO> searchPrescriptionsByArea(String locationName) {
         return prescriptionRepository.findPrescriptionSummariesByLocationName(locationName);
     }
 
-   /* public List<Prescription> findByDrugIdAndLocationId(Long drugId, Long locationId) {
-        return prescriptionRepository.findByDrugIdAndLocationId(drugId, locationId);
-    }*/
+
+    public PrescriptionDTO getPrescriptionDetailsByRxNumber(Long prescriptionId) {
+        Optional<Prescription> prescription = prescriptionRepository.findById(prescriptionId);
+        return prescription.map(PrescriptionMapper::toPrescriptionDTO).orElse(null);
+    }
+
+
 }

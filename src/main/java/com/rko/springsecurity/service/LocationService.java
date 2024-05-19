@@ -28,7 +28,7 @@ public class LocationService {
     public List<LocationDTO> getAllLocations() {
         return locationRepository.findAll()
                 .stream()
-                .map(location -> new LocationDTO(location.getName(),location.getLatitude(),location.getLatitude()))
+                .map(location -> new LocationDTO(location.getId(),location.getName(),location.getLatitude(),location.getLatitude()))
                 .toList();
     }
 

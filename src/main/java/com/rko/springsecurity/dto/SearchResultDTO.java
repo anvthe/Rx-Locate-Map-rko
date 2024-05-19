@@ -15,6 +15,5 @@ public class SearchResultDTO {
     private int drugUsersCount;
     private String drugName;
     private Location location;
-    private String error;
 
 }

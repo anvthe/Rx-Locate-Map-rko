@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PatientDTO {
     private String name;
-    private String phone;
     private int age;
 }

@@ -5,10 +5,12 @@ import com.rko.springsecurity.dto.LocationDTO;
 import com.rko.springsecurity.dto.SearchResultDTO;
 import com.rko.springsecurity.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/map")
@@ -16,15 +18,17 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
+
     @GetMapping()
-    public ResponseEntity<SearchResultDTO> search(
+    public ResponseEntity<?> search(
             @RequestParam("locationName") String locationName,
             @RequestParam("drugName") String drugName) {
-        SearchResultDTO result = searchService.searchDrugNameByLocationName(locationName, drugName);
-        if (result == null) {
-            return ResponseEntity.notFound().build();
+        try {
+            SearchResultDTO result = searchService.searchDrugNameByLocationName(locationName, drugName);
+            return ResponseEntity.ok(result);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return ResponseEntity.ok(result);
     }
 
 

@@ -24,9 +24,9 @@ public class SecurityConfiguration {
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login")
+                        .requestMatchers("/login","/register")
                         .permitAll()
-                        .requestMatchers("/demo-controller","/prescriptions-by-location","/prescriptions/by-location","/map/**").authenticated()
+                        .requestMatchers("/demo-controller","/prescriptions/**","/map/**").authenticated()
                 )
 
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
