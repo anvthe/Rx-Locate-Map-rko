@@ -14,9 +14,6 @@ public class DrugService {
     @Autowired
     private DrugRepository drugRepository;
 
-   /* @Autowired
-    private VendorService vendorService;*/
-
     public String getDrugByName(String name) {
         Optional<Drug> drugOptional = drugRepository.findByName(name);
         return drugOptional.map(Drug::getName).orElse(null);

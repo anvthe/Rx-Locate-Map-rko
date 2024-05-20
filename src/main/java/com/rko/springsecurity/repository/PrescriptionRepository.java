@@ -19,7 +19,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
     int countUsersByDrugIdAndLocationId(@Param("locationId") Long locationId, @Param("drugId") Long drugId);
 
 
-    @Query("SELECT new com.rko.springsecurity.dto.LocationDTO(p.id, l.name, l.latitude, l.longitude) FROM Prescription p JOIN p.location l WHERE l.name = :locationName")
+    @Query("SELECT new com.rko.springsecurity.dto.LocationDTO(p.id, l.name, l.lat, l.lng) FROM Prescription p JOIN p.location l WHERE l.name = :locationName")
     List<LocationDTO> findPrescriptionSummariesByLocationName(@Param("locationName") String locationName);
 
 

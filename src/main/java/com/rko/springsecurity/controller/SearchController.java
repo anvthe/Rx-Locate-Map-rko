@@ -19,10 +19,10 @@ public class SearchController {
     private SearchService searchService;
 
 
-    @GetMapping()
+    @GetMapping("{locationName}//{drugName}")
     public ResponseEntity<?> search(
-            @RequestParam("locationName") String locationName,
-            @RequestParam("drugName") String drugName) {
+            @PathVariable("locationName") String locationName,
+            @PathVariable("drugName") String drugName) {
         try {
             SearchResultDTO result = searchService.searchDrugNameByLocationName(locationName, drugName);
             return ResponseEntity.ok(result);
@@ -47,7 +47,7 @@ public class SearchController {
 
     }
 
-    @GetMapping("/locations")
+    @GetMapping()
     public List<LocationDTO> getAllLocations() {
         return searchService.getAllLocations();
 

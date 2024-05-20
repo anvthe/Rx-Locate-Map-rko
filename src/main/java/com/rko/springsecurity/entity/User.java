@@ -29,7 +29,7 @@ public class User implements UserDetails {
 
     @Column(unique = true)
     @NotBlank(message = "Username is mandatory")
-    private String email;
+    private String username;
 
 
     @NotBlank(message = "Password is mandatory")
@@ -45,7 +45,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

@@ -3,8 +3,6 @@ package com.rko.springsecurity.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +15,10 @@ public class Location {
 
     @Column(name = "location_name", unique = true)
     private String name;
-    private double latitude;
-    private double longitude;
+    @Column(name = "latitude")
+    private double lat;
+    @Column(name = "longitude")
+    private double lng;
 
 /* @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<Brand> brands;*/

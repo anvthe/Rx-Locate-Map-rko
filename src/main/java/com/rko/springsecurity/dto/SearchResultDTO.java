@@ -1,8 +1,8 @@
 package com.rko.springsecurity.dto;
 
-import com.rko.springsecurity.domain.Location;
 
-import com.rko.springsecurity.domain.Prescription;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchResultDTO {
-    private int drugUsersCount;
+    private int prescriptionCount;
     private String drugName;
-    private Location location;
+    private String locationName;
+    private double locationLat;
+    private double locationLng;
 
 }

@@ -1,7 +1,6 @@
 package com.rko.springsecurity.controller;
 
 import com.rko.springsecurity.dto.LocationDTO;
-//import com.rko.springsecurity.dto.PrescriptionSummaryDTO;
 import com.rko.springsecurity.dto.PrescriptionDTO;
 import com.rko.springsecurity.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class PrescriptionController {
     private PrescriptionService prescriptionService;
 
 
-    @GetMapping("/by-location")
-    public List<LocationDTO> getPrescriptionsByLocation(@RequestParam("locationName") String location) {
+    @GetMapping("/by-location/{locationName}")
+    public List<LocationDTO> getPrescriptionsByLocation(@PathVariable("locationName") String location) {
         return prescriptionService.searchPrescriptionsByArea(location);
 
     }

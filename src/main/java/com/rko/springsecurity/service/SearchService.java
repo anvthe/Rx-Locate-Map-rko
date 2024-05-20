@@ -36,12 +36,14 @@ public class SearchService {
             throw new NoSuchElementException("Drug not found");
         }
 
-        int drugUsersCount = prescriptionService.countUsersByDrugNameAndLocationName(locationName, drugName);
+        int prescriptionCount = prescriptionService.countUsersByDrugNameAndLocationName(locationName, drugName);
 
         SearchResultDTO result = new SearchResultDTO();
-        result.setDrugUsersCount(drugUsersCount);
-        result.setLocation(location);
+        result.setPrescriptionCount(prescriptionCount);
         result.setDrugName(drug);
+        result.setLocationName(locationName);
+        result.setLocationLat(location.getLat());
+        result.setLocationLng(location.getLng());
 
         return result;
     }
@@ -58,12 +60,14 @@ public class SearchService {
         throw new NoSuchElementException("Drug not found");
     }
 
-        int drugUsersCount = prescriptionService.countUsersByDrugIdAndLocationId(locationId, drugId);
+        int prescriptionCount = prescriptionService.countUsersByDrugIdAndLocationId(locationId, drugId);
 
     SearchResultDTO result = new SearchResultDTO();
-        result.setDrugUsersCount(drugUsersCount);
-        result.setLocation(location);
+        result.setPrescriptionCount(prescriptionCount);
         result.setDrugName(drug.getName());
+        result.setLocationName(location.getName());
+        result.setLocationLat(location.getLat());
+        result.setLocationLng(location.getLng());
 
         return result;
 }
