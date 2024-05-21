@@ -19,7 +19,7 @@ public class SearchController {
     private SearchService searchService;
 
 
-    @GetMapping("{locationName}//{drugName}")
+    @GetMapping("{locationName}/{drugName}")
     public ResponseEntity<?> search(
             @PathVariable("locationName") String locationName,
             @PathVariable("drugName") String drugName) {

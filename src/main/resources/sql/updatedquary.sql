@@ -5,8 +5,8 @@ CREATE TABLE users (
                          firstname VARCHAR(255) not null ,
                          lastname VARCHAR(255) not null ,
                          email VARCHAR(255) unique not null,
-                         password VARCHAR(48) not null ,
-                         role VARCHAR(20)
+                         password VARCHAR(255) not null ,
+                         role VARCHAR(255)
 );
 
 
@@ -77,7 +77,7 @@ CREATE TABLE prescription_drugs (   id INT AUTO_INCREMENT PRIMARY KEY,
 
 
 
-INSERT INTO locations (location_name, latitude, longitude) VALUES
+INSERT INTO locations (name, latitude, longitude) VALUES
                                              ('Gulshan-1', 23.7806615, 90.4112899),
                                              ('Banani', 23.7947552, 90.3954059),
                                              ('Dhanmondi', 23.7470303, 90.3655623),
@@ -138,28 +138,47 @@ INSERT INTO doctors (name, doctor_bmdc) VALUES
                                     ('Dr. Reza Miah', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000),
                                     ('Dr. Hasan Chowdhury', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000);
 
-INSERT INTO patients (name, phone)
+INSERT INTO patients (name, phone, age)
 VALUES
-    ('John Doe', '01234567890'),
-    ('Alice Smith', '09876543210'),
-    ('Bob Johnson', '05551234567'),
-    ('Emily Brown', '05559876543'),
-    ('Michael Wilson', '09998887776'),
-    ('Emma Lee', '01239874560'),
-    ('William Taylor', '07894561230'),
-    ('Olivia Martinez', '09517534680'),
-    ('James Anderson', '04561237890'),
-    ('Sophia Garcia', '03692581470'),
-    ('Alexander Hernandez', '07539518520'),
-    ('Mia Lopez', '03216549870'),
-    ('Ethan Perez', '06543219870'),
-    ('Charlotte Gonzalez', '02589631470'),
-    ('Daniel Ramirez', '07896541230'),
-    ('Amelia Torres', '09638527410'),
-    ('Matthew Flores', '01472583690'),
-    ('Harper Diaz', '01593578520'),
-    ('Henry Rivera', '03579514560'),
-    ('Ava Cruz', '08529637410');
+    ('John Doe', '01234567890', '55'),
+    ('Alice Smith', '09876543210','25'),
+    ('Bob Johnson', '05551234567','36'),
+    ('Emily Brown', '05559876543','88'),
+    ('Michael Wilson', '09998887776','63'),
+    ('Emma Lee', '01239874560','55'),
+    ('William Taylor', '07894561230','40'),
+    ('Olivia Martinez', '09517534680','52'),
+    ('James Anderson', '04561237890','93'),
+    ('Sophia Garcia', '03692581470','27'),
+    ('Alexander Hernandez', '07539518520','45'),
+    ('Mia Lopez', '03216549870','27'),
+    ('Ethan Perez', '06543219870','33'),
+    ('Charlotte Gonzalez', '02589631470','45'),
+    ('Daniel Ramirez', '07896541230','60'),
+    ('Amelia Torres', '09638527410','70'),
+    ('Matthew Flores', '01472583690','90'),
+    ('Harper Diaz', '01593578520','90'),
+    ('Henry Rivera', '03579514560','61'),
+    ('Ava Cruz', '08529637410','99');
+
+
+
+
+
+INSERT INTO drugs (drug_name, description, vendor_id, generic_id) VALUES
+                                                                     ('Indever', 'n/a', 1, 1),
+                                                                     ('Abetis', 'n/a', 1, 1),
+                                                                     ('Feglo-FZ', 'n/a', 1, 1),
+                                                                     ('Cora-DX', 'n/a', 1, 1),
+                                                                     ('Acical-D', 'n/a', 2, 2),
+                                                                     ('Reversair', 'n/a', 2, 2),
+                                                                     ('Xeldrin', 'n/a', 2, 2),
+                                                                     ('Artica', 'n/a', 3, 3),
+                                                                     ('Hexisol', 'n/a', 3, 3),
+                                                                     ('Paricel', 'n/a', 3, 3),
+                                                                     ('Gabarol-CR', 'n/a', 4, 4),
+                                                                     ('Atasin', 'n/a', 4, 4),
+                                                                     ('Micoral-Gel', 'n/a', 4, 4);
 
 
 INSERT INTO prescriptions (doctor_id, patient_id, location_id)
@@ -172,23 +191,6 @@ VALUES
     (3, 10, 2),
     (5, 8, 3),
     (1, 11, 3);
-
-
-
-INSERT INTO drugs (drug_name, description, vendor_id, generic_id) VALUES
-                                                                     ('Indever', n/a, 1, 1),
-                                                                     ('Abetis', n/a, 1, 1),
-                                                                     ('Feglo-FZ', n/a, 1, 1),
-                                                                     ('Cora-DX', n/a, 1, 1),
-                                                                     ('Acical-D', n/a, 2, 2),
-                                                                     ('Reversair', n/a, 2, 2),
-                                                                     ('Xeldrin', n/a, 2, 2),
-                                                                     ('Artica', n/a, 3, 3),
-                                                                     ('Hexisol', n/a, 3, 3),
-                                                                     ('Paricel', n/a, 3, 3),
-                                                                     ('Gabarol-CR', n/a, 4, 4),
-                                                                     ('Atasin', n/a, 4, 4),
-                                                                     ('Micoral-Gel', n/a, 4, 4);
 
 
 
