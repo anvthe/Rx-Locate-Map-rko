@@ -13,13 +13,14 @@ CREATE TABLE users (
 CREATE TABLE doctors (
                         id INT AUTO_INCREMENT PRIMARY KEY,
                         name VARCHAR(255) not null ,
-                        bmdc_no VARCHAR(20) unique not null
+                        doctor_bmdc VARCHAR(20) unique not null
 );
 
 CREATE TABLE patients (
                          id INT AUTO_INCREMENT PRIMARY KEY,
                          name VARCHAR(255) not null ,
-                         phone VARCHAR(20) unique not null
+                         phone VARCHAR(20) unique not null,
+                         age VARCHAR(255) not null
 );
 
 CREATE TABLE generics (
@@ -36,7 +37,7 @@ CREATE TABLE vendors (
 
 CREATE TABLE drugs (
                       id INT AUTO_INCREMENT PRIMARY KEY,
-                      name VARCHAR(255) not null ,
+                      drug_name VARCHAR(255) not null ,
                       description TEXT,
                       generic_id INT,
                       vendor_id INT,
@@ -58,7 +59,7 @@ CREATE TABLE prescriptions (
 
 CREATE TABLE locations (
                           id INT AUTO_INCREMENT PRIMARY KEY,
-                          name VARCHAR(255) unique not null ,
+                          location_name VARCHAR(255) unique not null ,
                           latitude DOUBLE unique not null ,
                           longitude DOUBLE unique not null
 );
@@ -77,7 +78,7 @@ CREATE TABLE prescription_drugs (   id INT AUTO_INCREMENT PRIMARY KEY,
 
 
 
-INSERT INTO locations (name, latitude, longitude) VALUES
+INSERT INTO locations (location_name, latitude, longitude) VALUES
                                              ('Gulshan-1', 23.7806615, 90.4112899),
                                              ('Banani', 23.7947552, 90.3954059),
                                              ('Dhanmondi', 23.7470303, 90.3655623),
