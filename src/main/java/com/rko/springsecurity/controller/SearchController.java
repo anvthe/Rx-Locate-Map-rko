@@ -58,12 +58,13 @@ public class SearchController {
 
     }
 
-    @GetMapping("divisions")
+    @GetMapping("/divisions")
     public List<String> getAllDivisions() {
         return Arrays.stream(Division.values()).map(Division::getLabel).toList();
     }
 
-    @GetMapping("division/locations/{division}")
+
+    @GetMapping("/division/locations/{division}")
     public List<LocationDTO> getAllDivisionLocations(@PathVariable String division) {
         return searchService.getDivisionLocations(division);
     }
