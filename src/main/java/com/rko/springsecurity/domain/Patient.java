@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -21,17 +20,16 @@ public class Patient {
 
     @NotBlank
     private String name;
+
     @Column(unique = true) @NotBlank
     private String phone;
+
     @NotBlank
     private int age;
 
 
-   /* @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Prescription> prescriptions;*/
-
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private Set<Prescription> prescriptions;
 
-    // Constructors, getters, and setters
+
 }

@@ -1,9 +1,9 @@
-package com.rko.springsecurity.auth;
+package com.rko.springsecurity.controller;
 
 
-import com.rko.springsecurity.dto.AuthenticationRequest;
-import com.rko.springsecurity.dto.AuthenticationResponse;
-import com.rko.springsecurity.dto.RegisterRequest;
+import com.rko.springsecurity.dto.AuthenticationRequestDTO;
+import com.rko.springsecurity.dto.AuthenticationResponseDTO;
+import com.rko.springsecurity.dto.RegisterRequestDTO;
 import com.rko.springsecurity.repository.UserRepository;
 import com.rko.springsecurity.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final UserRepository userRepository;
@@ -26,7 +26,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public String register(@Validated @RequestBody RegisterRequest request){
+    public String register(@Validated @RequestBody RegisterRequestDTO request) {
 
         try {
             if (request.getUsername() == null || request.getUsername().isEmpty()) {
@@ -50,12 +50,12 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequestDTO request) {
         try {
             String response = service.authenticate(request);
             return ResponseEntity.ok(response);
         } catch (UsernameNotFoundException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthenticationResponse("User not found"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthenticationResponseDTO("User not found"));
 
         }
     }

@@ -1,10 +1,10 @@
 package com.rko.springsecurity.service;
 
-import com.rko.springsecurity.dto.AuthenticationRequest;
-import com.rko.springsecurity.dto.AuthenticationResponse;
-import com.rko.springsecurity.dto.RegisterRequest;
-import com.rko.springsecurity.entity.User;
-import com.rko.springsecurity.entity.Role;
+import com.rko.springsecurity.dto.AuthenticationRequestDTO;
+import com.rko.springsecurity.dto.AuthenticationResponseDTO;
+import com.rko.springsecurity.dto.RegisterRequestDTO;
+import com.rko.springsecurity.domain.entity.User;
+import com.rko.springsecurity.domain.entity.Role;
 import com.rko.springsecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +22,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponseDTO register(RegisterRequestDTO request) {
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
@@ -33,12 +33,12 @@ public class AuthenticationService {
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDTO.builder()
                 .token(jwtToken)
                 .build();
     }
 
-    public String authenticate(AuthenticationRequest request) {
+    public String authenticate(AuthenticationRequestDTO request) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())

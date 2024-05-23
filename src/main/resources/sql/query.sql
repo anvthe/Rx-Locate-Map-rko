@@ -11,9 +11,9 @@ CREATE TABLE users (
 
 
 CREATE TABLE doctors (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        name VARCHAR(255) not null ,
-                        doctor_bmdc VARCHAR(20) unique not null
+                        id INT AUTO_INCREMENT primary key,
+                        name VARCHAR(255) not null,
+                        bmdc VARCHAR(255) unique not null
 );
 
 CREATE TABLE patients (
@@ -127,7 +127,7 @@ INSERT INTO vendors (name) VALUES
 
 
 
-INSERT INTO doctors (name, doctor_bmdc) VALUES
+INSERT INTO doctors (name, bmdc) VALUES
                                     ('Dr. Ashraful Islam', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000),
                                     ('Dr. Zahid Hossain', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000),
                                     ('Dr. Omar Ahmed', FLOOR(RAND() * (9999 - 1000 + 1)) + 1000),
@@ -185,19 +185,83 @@ INSERT INTO drugs (drug_name, description, vendor_id, generic_id) VALUES
 INSERT INTO prescriptions (doctor_id, patient_id, location_id)
 VALUES
     (1, 1, 1),
-    (2, 3, 1),
-    (4, 2, 1),
-    (3, 5, 2),
-    (7, 6, 2),
+    (1, 2, 1),
+    (1, 3, 1),
+    (2, 5, 2),
+    (2, 6, 2),
     (3, 10, 2),
+    (4, 8, 3),
+    (4, 4, 3),
+    (5, 11, 3),
     (5, 8, 3),
-    (1, 11, 3);
+    (6, 12, 3),
+    (7, 14, 4),
+    (7, 15, 4),
+    (8, 7, 5),
+    (8, 10, 5),
+    (9, 18, 4),
+    (9, 19, 4);
+
+INSERT INTO prescription_drugs (prescription_id, drug_id) VALUES
+                                                              (1, 1),
+                                                              (1, 2),
+                                                              (1, 3),
+                                                              (1, 4),
+                                                              (2, 5),
+                                                              (2, 6),
+                                                              (2, 7),
+                                                              (2, 8),
+                                                              (3, 9),
+                                                              (3, 10),
+                                                              (3, 11),
+                                                              (3, 12),
+                                                              (3, 13),
+                                                              (4, 1),
+                                                              (4, 2),
+                                                              (4, 3),
+                                                              (4, 4),
+                                                              (5, 5),
+                                                              (5, 6),
+                                                              (5, 7),
+                                                              (5, 8),
+                                                              (6, 9),
+                                                              (6, 10),
+                                                              (6, 11),
+                                                              (6, 12),
+                                                              (7, 13),
+                                                              (7, 1),
+                                                              (7, 2),
+                                                              (8, 3),
+                                                              (8, 4),
+                                                              (8, 5),
+                                                              (9, 6),
+                                                              (9, 7),
+                                                              (9, 8),
+                                                              (10, 9),
+                                                              (10, 10),
+                                                              (10, 11),
+                                                              (11, 12),
+                                                              (11, 13),
+                                                              (11, 1),
+                                                              (12, 2),
+                                                              (12, 3),
+                                                              (13, 4),
+                                                              (13, 5),
+                                                              (13, 6),
+                                                              (14, 7),
+                                                              (14, 8),
+                                                              (14, 9),
+                                                              (14, 10);
 
 
 
 
 
-
+SELECT DISTINCT  d.name, d.bmdc
+FROM prescriptions p
+         JOIN locations l ON p.location_id = l.id
+         JOIN doctors d ON p.doctor_id = d.bmdc
+WHERE l.location_name = 'Banani';
 
 
 

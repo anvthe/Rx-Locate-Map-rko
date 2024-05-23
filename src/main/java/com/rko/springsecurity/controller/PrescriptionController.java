@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/prescriptions")
+
 public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
@@ -20,6 +21,7 @@ public class PrescriptionController {
         return prescriptionService.searchPrescriptionsByArea(location);
 
     }
+
 
     @GetMapping("/{id}")
     public PrescriptionDTO getPrescriptionDetails(@PathVariable Long id) {

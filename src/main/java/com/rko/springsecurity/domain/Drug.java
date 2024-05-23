@@ -19,6 +19,7 @@ public class Drug {
     @Column(name = "drug_name")
     @NotBlank
     private String name;
+
     private String description;
 
     @ManyToOne
@@ -29,16 +30,4 @@ public class Drug {
     @JoinColumn(name = "generic_id")
     private Generic generic;
 
- /*   public @NotBlank String getName() {
-        return name;
-    }*/
-
-    /* @ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location location;*/
-
-   /* @OneToMany(mappedBy = "drug", fetch = FetchType.EAGER)
-    private Set<Prescription> prescriptions;*/
-
-    // Constructors, getters, and setters
 }

@@ -5,14 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-
-//new added
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import org.springframework.stereotype.Service;
 
 
@@ -22,10 +16,14 @@ import java.util.function.Function;
 
 
 @Service
+@Slf4j
 public class JwtService {
 
     //private static final String SECRET_KEY = "";
+
     private static final String SECRET_KEY = "DD3rFs0S8mRxHZ9pImi9AJBmeg4ylC1n4mKI9evPHgKzsonJpNTQdWXkWau8BPBk";
+
+
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

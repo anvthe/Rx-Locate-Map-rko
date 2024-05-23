@@ -32,6 +32,7 @@ public class SearchController {
     }
 
 
+
     @GetMapping("/id")
     public ResponseEntity<SearchResultDTO> search(@RequestParam Long locationId, @RequestParam Long drugId) {
         SearchResultDTO result = searchService.searchByDrugIdAndLocationId(locationId, drugId);
@@ -41,13 +42,15 @@ public class SearchController {
         return ResponseEntity.ok(result);
     }
 
+
     @GetMapping("/drugs")
     public List<DrugDTO> getAllDrugs() {
         return searchService.getAllDrugs();
 
     }
 
-    @GetMapping()
+
+    @GetMapping("/locations")
     public List<LocationDTO> getAllLocations() {
         return searchService.getAllLocations();
 

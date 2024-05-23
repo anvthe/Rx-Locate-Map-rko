@@ -3,7 +3,6 @@ package com.rko.springsecurity.service;
 import com.rko.springsecurity.domain.Prescription;
 import com.rko.springsecurity.dto.LocationDTO;
 import com.rko.springsecurity.dto.PrescriptionDTO;
-import com.rko.springsecurity.mapper.PrescriptionMapper;
 import com.rko.springsecurity.repository.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,7 +32,7 @@ public class PrescriptionService {
 
     public PrescriptionDTO getPrescriptionDetailsByRxNumber(Long prescriptionId) {
         Optional<Prescription> prescription = prescriptionRepository.findById(prescriptionId);
-        return prescription.map(PrescriptionMapper::toPrescriptionDTO).orElse(null);
+        return prescription.map(PrescriptionDTO::from).orElse(null);
     }
 
 

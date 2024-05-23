@@ -12,10 +12,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchResultDTO {
+
     private int prescriptionCount;
+
     private String drugName;
+
     private String locationName;
+
     private double locationLat;
+
     private double locationLng;
 
 }

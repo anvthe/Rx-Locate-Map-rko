@@ -24,9 +24,5 @@ public class Generic {
     @OneToMany(mappedBy = "generic", cascade = CascadeType.ALL)
     private List<Drug> drugs;
 
-    /*@ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location location;*/
 
-    // Constructors, getters, and setters
 }

@@ -37,5 +37,5 @@ public class Prescription {
     )
     private List<Drug> drugs;
 
-    // Constructors, getters, and setters
+
 }

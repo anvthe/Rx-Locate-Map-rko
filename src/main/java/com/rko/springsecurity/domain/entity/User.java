@@ -1,4 +1,4 @@
-package com.rko.springsecurity.entity;
+package com.rko.springsecurity.domain.entity;
 
 
 import jakarta.persistence.*;
@@ -25,6 +25,7 @@ public class User implements UserDetails {
 
 
     private String firstname;
+
     private String lastname;
 
     @Column(unique = true)
@@ -74,5 +75,4 @@ public class User implements UserDetails {
     }
 
 
-    // Constructors, getters, and setters
 }

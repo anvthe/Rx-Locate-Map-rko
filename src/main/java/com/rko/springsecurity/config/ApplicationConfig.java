@@ -1,5 +1,6 @@
 package com.rko.springsecurity.config;
 
+
 import com.rko.springsecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
+
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -22,6 +25,8 @@ import org.springframework.stereotype.Service;
 public class ApplicationConfig {
 
     private final UserRepository repository;
+
+
 
     @Bean
     public UserDetailsService userDetailsService(){
@@ -46,4 +51,5 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

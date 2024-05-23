@@ -18,15 +18,15 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
-    //authorization
+
     @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login")
+                        .requestMatchers("/auth/**")
                         .permitAll()
-                        .requestMatchers("/demo-controller","/prescriptions/**","/map/**").authenticated()
+                        .requestMatchers("/demo-controller","/prescriptions/**","/doctors/**","/map/**").authenticated()
                 )
 
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
