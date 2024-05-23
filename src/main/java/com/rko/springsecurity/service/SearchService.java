@@ -7,6 +7,7 @@ import com.rko.springsecurity.dto.LocationDTO;
 import com.rko.springsecurity.dto.SearchResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.rko.springsecurity.enums.Division;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -78,5 +79,9 @@ public class SearchService {
 
     public List<LocationDTO> getAllLocations() {
         return locationService.getAllLocations();
+    }
+
+    public List<LocationDTO> getDivisionLocations(String division) {
+        return locationService.getLocationsUnderDivision(Division.findByLabel(division));
     }
 }

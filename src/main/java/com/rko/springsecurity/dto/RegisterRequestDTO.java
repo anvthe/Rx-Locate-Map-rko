@@ -1,5 +1,6 @@
 package com.rko.springsecurity.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +16,9 @@ public class RegisterRequestDTO {
 
     private String lastname;
 
+    @NotBlank(message = "Username is mandatory")
     private String username;
 
+    @NotBlank(message = "Password is mandatory")
     private String password;
 }

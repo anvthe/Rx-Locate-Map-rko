@@ -1,4 +1,4 @@
-package com.rko.springsecurity.domain.entity;
+package com.rko.springsecurity.enums;
 
 public enum Role {
     ROLE_USER,

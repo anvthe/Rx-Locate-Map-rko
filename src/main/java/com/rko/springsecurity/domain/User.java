@@ -1,6 +1,7 @@
-package com.rko.springsecurity.domain.entity;
+package com.rko.springsecurity.domain;
 
 
+import com.rko.springsecurity.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

@@ -3,8 +3,8 @@ package com.rko.springsecurity.service;
 import com.rko.springsecurity.dto.AuthenticationRequestDTO;
 import com.rko.springsecurity.dto.AuthenticationResponseDTO;
 import com.rko.springsecurity.dto.RegisterRequestDTO;
-import com.rko.springsecurity.domain.entity.User;
-import com.rko.springsecurity.domain.entity.Role;
+import com.rko.springsecurity.domain.User;
+import com.rko.springsecurity.enums.Role;
 import com.rko.springsecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 

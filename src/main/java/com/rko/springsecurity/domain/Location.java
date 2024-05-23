@@ -1,5 +1,6 @@
 package com.rko.springsecurity.domain;
 
+import com.rko.springsecurity.enums.Division;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,9 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private Division division;
 
     @Column(name = "location_name", unique = true)
     private String name;
