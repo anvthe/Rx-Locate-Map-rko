@@ -4,7 +4,6 @@ package com.rko.springsecurity.controller;
 import com.rko.springsecurity.dto.AuthenticationRequestDTO;
 import com.rko.springsecurity.dto.AuthenticationResponseDTO;
 import com.rko.springsecurity.dto.RegisterRequestDTO;
-
 import com.rko.springsecurity.exception.ValidationUtils;
 import com.rko.springsecurity.repository.UserRepository;
 import com.rko.springsecurity.service.AuthenticationService;
