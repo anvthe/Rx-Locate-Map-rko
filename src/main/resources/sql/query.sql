@@ -412,6 +412,38 @@ INSERT INTO prescription_drugs (prescription_id, drug_id) VALUES
                                                               (14, '40');
 
 
+INSERT INTO doctors (name, bmdc) VALUES
+                                     ('Dr. Ashraful Islam', 1022),
+                                     ('Dr. Nafis Rahman', 1023),
+                                     ('Dr. Ayesha Siddiqui', 1024),
+                                     ('Dr. Omar Farooq', 1025),
+                                     ('Dr. Rehana Begum', 1026),
+                                     ('Dr. Tahmid Karim', 1027),
+                                     ('Dr. Nusrat Jahan', 1028),
+                                     ('Dr. Hasan Mahmud', 1029),
+                                     ('Dr. Kamal Ahmed', 1030),
+                                     ('Dr. Saima Chowdhury', 1031),
+                                     ('Dr. Ashraful Islam', 1032),
+                                     ('Dr. Nafis Rahma', 1033),
+                                     ('Dr. Ayesha Siddiqui', 1034),
+                                     ('Dr. Omar Farooq', 1035),
+                                     ('Dr. Rehana Begum', 1036),
+                                     ('Dr. Tahmid Karim', 1037),
+                                     ('Dr. Nusrat Jahan', 1038),
+                                     ('Dr. Hasan Mahmud', 1039),
+                                     ('Dr. Kamal Ahmed', 1040),
+                                     ('Dr. Saima Chowdhury', 1041),
+                                     ('Dr. Ashraful Islam', 1042),
+                                     ('Dr. Nafis Rahman', 1043),
+                                     ('Dr. Ayesha Siddiqu', 1044),
+                                     ('Dr. Omar Farooq', 1045),
+                                     ('Dr. Rehana Begum', 1046),
+                                     ('Dr. Tahmid Karim', 1047),
+                                     ('Dr. Nusrat Jahan', 1048),
+                                     ('Dr. Hasan Mahmud', 1049),
+                                     ('Dr. Kamal Ahmed', 1050);
+
+
 
 
 
