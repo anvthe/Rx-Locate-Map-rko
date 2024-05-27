@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import com.rko.springsecurity.enums.Division;
+import com.rko.springsecurity.domain.Division;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {

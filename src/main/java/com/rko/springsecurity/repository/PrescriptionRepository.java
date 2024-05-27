@@ -1,10 +1,13 @@
 package com.rko.springsecurity.repository;
 
 import com.rko.springsecurity.domain.Prescription;
+import com.rko.springsecurity.dto.AreaDTO;
+import com.rko.springsecurity.dto.DivisionDTO;
 import com.rko.springsecurity.dto.LocationDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 
 import java.util.List;
 
@@ -20,10 +23,79 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
 
 
     @Query("SELECT new com.rko.springsecurity.dto.LocationDTO(p.id, l.name, l.lat, l.lng) FROM Prescription p JOIN p.location l WHERE l.name = :locationName")
+
+
     List<LocationDTO> findPrescriptionSummariesByLocationName(@Param("locationName") String locationName);
 
 
+    @Query("SELECT new com.rko.springsecurity.dto.DivisionDTO(d.name, COUNT(p), d.lat, d.lng) " +
+            "FROM Prescription p " +
+            "JOIN p.location l " +
+            "JOIN l.division d " +
+            "JOIN p.drugs dr " +
+            "WHERE dr.name = :drugName  " +
+            "GROUP BY d.name")
+    List<DivisionDTO> findDivisionsByDrugName(@Param("drugName") String drugName);
 
+
+
+
+
+   /* @Query(value = "SELECT d.name AS division_name, COUNT(p.id) AS prescription_count, l.latitude, l.longitude " +
+            "FROM prescriptions p " +
+            "JOIN locations l ON p.location_id = l.id " +
+            "JOIN divisions d ON l.division_id = d.id " +
+            "JOIN prescription_drugs pd ON p.id = pd.prescription_id " +
+            "JOIN drugs dr ON pd.drug_id = dr.id " +
+            "WHERE dr.drug_name = :drugName and d.name = :divisionName" +
+            "GROUP BY d.name, l.latitude, l.longitude",
+            nativeQuery = true)*/
+
+
+
+    @Query("SELECT new com.rko.springsecurity.dto.AreaDTO(l.name, COUNT(p), l.lat, l.lng) " +
+            "FROM Prescription p " +
+            "JOIN p.location l " +
+            "JOIN l.division d " +
+            "JOIN p.drugs dr " +
+            "WHERE dr.name = :drugName AND d.name = :divisionName " +
+            "GROUP BY l.name, l.lat, l.lng")
+
+    List<AreaDTO> findLocationsByDivisionAndDrugName(@Param("drugName") String drugName, @Param("divisionName") String divisionName);
+}
+
+
+
+
+
+
+
+
+/*    @Query("Select count (*) Prescription p join Division d join p.Location l join p.drugs d  join d.name, d.lat, d.lng where d.name = :drugName group by d.name, d.lat, d.lng")*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*    @Query("SELECT new com.rko.springsecurity.dto.LocationDTO(l.id, l.name, COUNT(DISTINCT d), COUNT(p), l.lat, l.lng) FROM Location l LEFT JOIN l.doctors d LEFT JOIN l.prescriptions p WHERE l.division = :division GROUP BY l.id")
+
+    List<LocationDTO> findLocationsWithCountsByDivision(@Param("division") Division division);*/
 
 
 
@@ -47,4 +119,4 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
 
    /* @Query(value = "SELECT COUNT(p) FROM Prescription p JOIN p.brands b JOIN p.location l WHERE b.brandName = :brandName AND l.locationName = :locationName")
     int countUsersByBrandNameAndLocationName(String brandName, String locationName);*/
-}
+

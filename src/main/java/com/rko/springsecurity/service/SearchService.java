@@ -2,13 +2,13 @@ package com.rko.springsecurity.service;
 
 import com.rko.springsecurity.domain.Drug;
 import com.rko.springsecurity.domain.Location;
-import com.rko.springsecurity.dto.DrugDTO;
-import com.rko.springsecurity.dto.LocationDTO;
-import com.rko.springsecurity.dto.SearchResultDTO;
+import com.rko.springsecurity.dto.*;
+import com.rko.springsecurity.repository.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rko.springsecurity.enums.Division;
+import com.rko.springsecurity.domain.Division;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -23,6 +23,10 @@ public class SearchService {
 
     @Autowired
     private PrescriptionService prescriptionService;
+
+
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
 
 
 
@@ -50,20 +54,67 @@ public class SearchService {
     }
 
 
-    public SearchResultDTO searchByDrugIdAndLocationId(Long locationId, Long drugId){
-    Location location = locationService.getLocationById(locationId);
-        if (location == null) {
-        throw new NoSuchElementException("Location not found");
+
+
+
+
+
+
+
+/*    public List<DivisionDTO> getDivisionsByDrugName(String drugName) {
+        String  drug = drugService.getDrugByName(drugName);
+        if (drug == null) {
+            throw new NoSuchElementException("Drug not found");
+        }
+
+        List<Object[]> divisionsWithCounts = prescriptionRepository.findDivisionsByDrugName(drugName);
+
+        List<DivisionDTO> results = new ArrayList<>();
+        for (Object[] divisionWithCount : divisionsWithCounts) {
+            Division division = (Division) divisionWithCount[0];
+            long prescriptionCount = (long) divisionWithCount[1];
+
+            results.add(new DivisionDTO(division,prescriptionCount));
+        }
+
+        return results;
+    }*/
+
+
+    public List<DivisionDTO> getDivisionsByDrugName(String drugName) {
+        return prescriptionRepository.findDivisionsByDrugName(drugName);
     }
 
-    Drug drug = drugService.getDrugById(drugId);
-        if (drug == null) {
-        throw new NoSuchElementException("Drug not found");
+
+    public List<AreaDTO> getLocationsByDivisionAndDrugName(String drugName, String divisionName) {
+        return prescriptionRepository.findLocationsByDivisionAndDrugName(drugName, divisionName);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    public SearchResultDTO searchByDrugIdAndLocationId(Long locationId, Long drugId) {
+        Location location = locationService.getLocationById(locationId);
+        if (location == null) {
+            throw new NoSuchElementException("Location not found");
+        }
+
+        Drug drug = drugService.getDrugById(drugId);
+        if (drug == null) {
+            throw new NoSuchElementException("Drug not found");
+        }
 
         int prescriptionCount = prescriptionService.countUsersByDrugIdAndLocationId(locationId, drugId);
 
-    SearchResultDTO result = new SearchResultDTO();
+        SearchResultDTO result = new SearchResultDTO();
         result.setPrescriptionCount(prescriptionCount);
         result.setDrugName(drug.getName());
         result.setLocationName(location.getName());
@@ -71,7 +122,9 @@ public class SearchService {
         result.setLocationLng(location.getLng());
 
         return result;
-}
+    }
+
+
 
     public List<DrugDTO> getAllDrugs() {
         return drugService.getAllDrugs();
@@ -81,7 +134,21 @@ public class SearchService {
         return locationService.getAllLocations();
     }
 
-    public List<LocationDTO> getDivisionLocations(String division) {
+
+
+
+
+
+
+
+/*    public List<LocationDTO> getDivisionLocations(String division) {
         return locationService.getLocationsUnderDivision(Division.findByLabel(division));
-    }
+    }*/
+
+
+
+
+ /*   public List<LocationDTO> getLocationsUnderDivision(Division division) {
+        return locationService.findLocationsWithCountsByDivision(division);
+    }*/
 }

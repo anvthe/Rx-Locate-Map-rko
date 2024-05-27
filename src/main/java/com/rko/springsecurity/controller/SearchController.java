@@ -1,16 +1,12 @@
 package com.rko.springsecurity.controller;
 
-import com.rko.springsecurity.dto.DrugDTO;
-import com.rko.springsecurity.dto.LocationDTO;
-import com.rko.springsecurity.dto.SearchResultDTO;
+import com.rko.springsecurity.dto.*;
 import com.rko.springsecurity.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.rko.springsecurity.enums.Division;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -21,7 +17,7 @@ public class SearchController {
     private SearchService searchService;
 
 
-    @GetMapping("{locationName}/{drugName}")
+    @GetMapping("/{locationName}/{drugName}")
     public ResponseEntity<?> search(
             @PathVariable("locationName") String locationName,
             @PathVariable("drugName") String drugName) {
@@ -58,14 +54,47 @@ public class SearchController {
 
     }
 
-    @GetMapping("/divisions")
+
+
+
+
+
+/*
+    @GetMapping("/list-divisions")
     public List<String> getAllDivisions() {
         return Arrays.stream(Division.values()).map(Division::getLabel).toList();
     }
 
 
-    @GetMapping("/division/locations/{division}")
+
+
+
+    @GetMapping("/{division}")
     public List<LocationDTO> getAllDivisionLocations(@PathVariable String division) {
         return searchService.getDivisionLocations(division);
+    }
+*/
+
+
+
+
+
+
+
+    @GetMapping("/{drugName}")
+    public ResponseEntity<?> getDivisionsByDrugName(@PathVariable String drugName) {
+        List<DivisionDTO> divisions = searchService.getDivisionsByDrugName(drugName);
+        return ResponseEntity.ok(divisions);
+    }
+
+
+
+
+@GetMapping("/select/{drugName}/{divisionName}")
+    public ResponseEntity<?> getLocationsByDivisionAndDrugName(
+            @PathVariable String drugName,
+            @PathVariable String divisionName) {
+        List<AreaDTO> locations = searchService.getLocationsByDivisionAndDrugName(drugName, divisionName);
+        return ResponseEntity.ok(locations);
     }
 }

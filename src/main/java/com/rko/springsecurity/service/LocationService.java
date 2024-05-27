@@ -5,7 +5,7 @@ import com.rko.springsecurity.dto.LocationDTO;
 import com.rko.springsecurity.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rko.springsecurity.enums.Division;
+import com.rko.springsecurity.domain.Division;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,5 +39,12 @@ public class LocationService {
                 .map(location -> new LocationDTO(location.getId(),location.getName(),location.getLat(),location.getLat()))
                 .toList();
     }
+
+ /*   public List<LocationDTO> findLocationsWithCountsByDivision(Division division) {
+        return locationRepository.findAllByDivision(division)
+                .stream()
+                .map(location -> new LocationDTO(location.getId(),location.getName(),location.getDoctorsCount(),location.getPrescriptions(),location.getLat(),location.getLat()))
+                .toList();
+    }*/
 
 }
