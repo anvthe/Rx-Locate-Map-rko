@@ -92,7 +92,8 @@ public class SearchService {
 
     public Page<AreaDTO> getLocationsByDivisionAndDrugName(String drugName, String divisionName, int page, int size, Sort prescriptionCount) {
         Pageable pageable = PageRequest.of(page, size);
-        return prescriptionRepository.findLocationsByDivisionAndDrugName(drugName, divisionName, pageable);
+        Page<AreaDTO> areaDTOPage = prescriptionRepository.findLocationsByDivisionAndDrugName(drugName, divisionName, pageable);
+        return areaDTOPage;
     }
 
 
