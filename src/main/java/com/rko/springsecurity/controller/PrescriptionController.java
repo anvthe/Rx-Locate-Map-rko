@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/prescriptions")
+@RequestMapping("/prescription")
 
 public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
 
-    @GetMapping("/by-location/{locationName}")
+    @GetMapping("/by/{locationName}")
     public List<LocationDTO> getPrescriptionsByLocation(@PathVariable("locationName") String location) {
         return prescriptionService.searchPrescriptionsByArea(location);
 

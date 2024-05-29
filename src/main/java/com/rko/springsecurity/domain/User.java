@@ -30,11 +30,11 @@ public class User implements UserDetails {
     private String lastname;
 
     @Column(unique = true)
-    @NotBlank(message = "Username is mandatory")
+    @NotBlank(message = "Username must be")
     private String username;
 
 
-    @NotBlank(message = "Password is mandatory")
+    @NotBlank(message = "Username must be")
     private String password;
 
     @Enumerated(EnumType.STRING)

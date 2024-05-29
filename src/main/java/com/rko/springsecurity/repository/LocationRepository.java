@@ -14,5 +14,8 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     Optional<Location> findById(Long locationId);
 
-    List<Location> findAllByDivision(Division division);
+
+
+
+   /* List<Location> findAllByDivision(Division division);*/
 }

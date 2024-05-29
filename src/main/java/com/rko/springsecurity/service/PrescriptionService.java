@@ -25,6 +25,8 @@ public class PrescriptionService {
     }
 
 
+
+
     public List<LocationDTO> searchPrescriptionsByArea(String locationName) {
         return prescriptionRepository.findPrescriptionSummariesByLocationName(locationName);
     }

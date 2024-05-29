@@ -12,6 +12,8 @@ public class DivisionDTO {
 
     private String divisionName;
 
+    private String drugName;
+
     private long prescriptionCount;
 
     private double lat;

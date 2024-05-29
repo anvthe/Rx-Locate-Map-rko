@@ -2,12 +2,15 @@ package com.rko.springsecurity.repository;
 
 import com.rko.springsecurity.domain.Prescription;
 import com.rko.springsecurity.dto.AreaDTO;
+
 import com.rko.springsecurity.dto.DivisionDTO;
 import com.rko.springsecurity.dto.LocationDTO;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -28,7 +31,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
     List<LocationDTO> findPrescriptionSummariesByLocationName(@Param("locationName") String locationName);
 
 
-    @Query("SELECT new com.rko.springsecurity.dto.DivisionDTO(d.name, COUNT(p), d.lat, d.lng) " +
+    @Query("SELECT new com.rko.springsecurity.dto.DivisionDTO(d.name, dr.name, COUNT(p), d.lat, d.lng) " +
             "FROM Prescription p " +
             "JOIN p.location l " +
             "JOIN l.division d " +
@@ -53,7 +56,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
 
 
 
-    @Query("SELECT new com.rko.springsecurity.dto.AreaDTO(l.name, COUNT(p), l.lat, l.lng) " +
+    @Query("SELECT new com.rko.springsecurity.dto.AreaDTO(d.name, l.name, COUNT(p), l.lat, l.lng) " +
             "FROM Prescription p " +
             "JOIN p.location l " +
             "JOIN l.division d " +
@@ -61,8 +64,9 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
             "WHERE dr.name = :drugName AND d.name = :divisionName " +
             "GROUP BY l.name, l.lat, l.lng")
 
-    List<AreaDTO> findLocationsByDivisionAndDrugName(@Param("drugName") String drugName, @Param("divisionName") String divisionName);
+    Page<AreaDTO> findLocationsByDivisionAndDrugName(@Param("drugName") String drugName, @Param("divisionName") String divisionNam, Pageable pageable);
 }
+
 
 
 

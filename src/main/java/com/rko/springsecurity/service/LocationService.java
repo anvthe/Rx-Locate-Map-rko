@@ -33,12 +33,25 @@ public class LocationService {
                 .toList();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+/*
     public List<LocationDTO> getLocationsUnderDivision(Division division) {
         return locationRepository.findAllByDivision(division)
                 .stream()
                 .map(location -> new LocationDTO(location.getId(),location.getName(),location.getLat(),location.getLat()))
                 .toList();
     }
+*/
 
  /*   public List<LocationDTO> findLocationsWithCountsByDivision(Division division) {
         return locationRepository.findAllByDivision(division)

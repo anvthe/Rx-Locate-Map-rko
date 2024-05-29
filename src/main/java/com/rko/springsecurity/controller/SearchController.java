@@ -3,6 +3,7 @@ package com.rko.springsecurity.controller;
 import com.rko.springsecurity.dto.*;
 import com.rko.springsecurity.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,18 +42,10 @@ public class SearchController {
     }
 
 
-    @GetMapping("/drugs")
-    public List<DrugDTO> getAllDrugs() {
-        return searchService.getAllDrugs();
-
-    }
 
 
-    @GetMapping("/locations")
-    public List<LocationDTO> getAllLocations() {
-        return searchService.getAllLocations();
 
-    }
+
 
 
 
@@ -93,8 +86,12 @@ public class SearchController {
 @GetMapping("/select/{drugName}/{divisionName}")
     public ResponseEntity<?> getLocationsByDivisionAndDrugName(
             @PathVariable String drugName,
-            @PathVariable String divisionName) {
-        List<AreaDTO> locations = searchService.getLocationsByDivisionAndDrugName(drugName, divisionName);
+            @PathVariable String divisionName,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        List<AreaDTO> locations = searchService.getLocationsByDivisionAndDrugName(drugName, divisionName, page, size, Sort.by("prescriptionCount").descending()).getContent();
         return ResponseEntity.ok(locations);
     }
+
+
 }

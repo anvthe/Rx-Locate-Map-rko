@@ -30,4 +30,9 @@ public class DrugService {
                 .map(drug -> new DrugDTO(drug.getName()))
                 .toList();
     }
+
+
+    public Optional<Drug> fetchDrugByName(String name) {
+        return drugRepository.findByName(name);
+    }
 }

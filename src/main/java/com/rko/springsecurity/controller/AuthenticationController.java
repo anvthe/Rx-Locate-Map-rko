@@ -4,8 +4,6 @@ package com.rko.springsecurity.controller;
 import com.rko.springsecurity.dto.AuthenticationRequestDTO;
 import com.rko.springsecurity.dto.AuthenticationResponseDTO;
 import com.rko.springsecurity.dto.RegisterRequestDTO;
-import com.rko.springsecurity.exception.Validation;
-import com.rko.springsecurity.repository.UserRepository;
 import com.rko.springsecurity.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final UserRepository userRepository;
+ ;
 
     private final AuthenticationService service;
 
@@ -28,7 +26,6 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Validated @RequestBody RegisterRequestDTO request) {
         try {
-            Validation.validateRegisterRequest(request, userRepository);
             service.register(request);
             return ResponseEntity.ok("User created successfully");
         } catch (ResponseStatusException ex) {

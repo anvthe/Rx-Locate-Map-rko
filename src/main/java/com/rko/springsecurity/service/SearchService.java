@@ -5,10 +5,13 @@ import com.rko.springsecurity.domain.Location;
 import com.rko.springsecurity.dto.*;
 import com.rko.springsecurity.repository.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.rko.springsecurity.domain.Division;
 
-import java.util.ArrayList;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -86,11 +89,11 @@ public class SearchService {
     }
 
 
-    public List<AreaDTO> getLocationsByDivisionAndDrugName(String drugName, String divisionName) {
-        return prescriptionRepository.findLocationsByDivisionAndDrugName(drugName, divisionName);
+
+    public Page<AreaDTO> getLocationsByDivisionAndDrugName(String drugName, String divisionName, int page, int size, Sort prescriptionCount) {
+        Pageable pageable = PageRequest.of(page, size);
+        return prescriptionRepository.findLocationsByDivisionAndDrugName(drugName, divisionName, pageable);
     }
-
-
 
 
 
@@ -141,6 +144,23 @@ public class SearchService {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*    public List<LocationDTO> getDivisionLocations(String division) {
         return locationService.getLocationsUnderDivision(Division.findByLabel(division));
     }*/
@@ -148,7 +168,7 @@ public class SearchService {
 
 
 
- /*   public List<LocationDTO> getLocationsUnderDivision(Division division) {
+/*    public List<LocationDTO> getLocationsUnderDivision(Division division) {
         return locationService.findLocationsWithCountsByDivision(division);
     }*/
 }
