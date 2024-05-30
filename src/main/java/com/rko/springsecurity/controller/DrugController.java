@@ -2,6 +2,7 @@ package com.rko.springsecurity.controller;
 
 import com.rko.springsecurity.domain.Drug;
 import com.rko.springsecurity.dto.DrugDTO;
+import com.rko.springsecurity.dto.DrugDetailsDTO;
 import com.rko.springsecurity.service.DrugService;
 import com.rko.springsecurity.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,18 @@ public class DrugController {
 
 
     @GetMapping("/drug-list")
-    public List<DrugDTO> getAllDrugs() {
+    public List<DrugDetailsDTO> getAllDrugs() {
         return searchService.getAllDrugs();
 
     }
 
     @GetMapping("/name/{drugName}")
-    public ResponseEntity<DrugDTO> getDrugByName(@PathVariable String drugName) {
+    public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
 
         Drug drug = drugService.fetchDrugByName(drugName).orElseThrow(IllegalAccessError::new);
-        DrugDTO drugDTO = DrugDTO.from(drug);
+        DrugDetailsDTO detailsDTO = DrugDetailsDTO.from(drug);
 
-        return ResponseEntity.ok(drugDTO);
+        return ResponseEntity.ok(detailsDTO);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.rko.springsecurity.service;
 
+import com.rko.springsecurity.domain.Division;
 import com.rko.springsecurity.domain.Drug;
 import com.rko.springsecurity.domain.Location;
 import com.rko.springsecurity.dto.*;
@@ -130,7 +131,7 @@ public class SearchService {
 
 
 
-    public List<DrugDTO> getAllDrugs() {
+    public List<DrugDetailsDTO> getAllDrugs() {
         return drugService.getAllDrugs();
     }
 
@@ -162,9 +163,6 @@ public class SearchService {
 
 
 
-/*    public List<LocationDTO> getDivisionLocations(String division) {
-        return locationService.getLocationsUnderDivision(Division.findByLabel(division));
-    }*/
 
 
 

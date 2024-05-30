@@ -12,6 +12,8 @@ public class DrugDTO {
 
     private String name;
 
+
+
     public static DrugDTO from(Drug drug) {
 
         DrugDTO drugDTO = new DrugDTO();

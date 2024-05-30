@@ -1,8 +1,7 @@
 package com.rko.springsecurity.controller;
 
-import com.rko.springsecurity.domain.Doctor;
+
 import com.rko.springsecurity.dto.DoctorDTO;
-import com.rko.springsecurity.dto.PrescriptionDTO;
 import com.rko.springsecurity.repository.DoctorRepository;
 import com.rko.springsecurity.service.DoctorService;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +38,7 @@ public class DoctorController {
         return doctorService.getAllDoctorsByLocation(locationName);
     }
 
+
     @GetMapping("/doctor-list-by-drug/{drugName}")
     public ResponseEntity<List<DoctorDTO>> getDoctorsByDrug(@PathVariable String drugName) {
         List<DoctorDTO> doctorDTOS = doctorRepository.findDoctorsByDrug(drugName).stream()
@@ -47,5 +47,14 @@ public class DoctorController {
 
         return ResponseEntity.ok(doctorDTOS);
     }
-}
+
+        @GetMapping("/doctor-list-by-drug/{divisionName}/{drugName}")
+        public ResponseEntity<List<DoctorDTO>> getDoctorsByDivisionAndDrug(@PathVariable String divisionName, @PathVariable String drugName) {
+            List<DoctorDTO> doctorDTOS = doctorService.getDoctorsByDivisionAndDrug(divisionName, drugName);
+            return ResponseEntity.ok(doctorDTOS);
+        }
+    }
+
+
+
 

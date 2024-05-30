@@ -36,5 +36,10 @@ public class DoctorService {
     }
 
 
-
-}
+        public List<DoctorDTO> getDoctorsByDivisionAndDrug(String divisionName, String drugName) {
+            List<Doctor> doctors = doctorRepository.findDoctorsByDivisionAndDrug(divisionName, drugName);
+            return doctors.stream()
+                    .map(DoctorDTO::from)
+                    .collect(Collectors.toList());
+        }
+    }

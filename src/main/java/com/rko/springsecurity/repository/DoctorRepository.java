@@ -28,4 +28,17 @@ public interface DoctorRepository extends JpaRepository<Doctor, String> {
     List<Doctor> findDoctorsByDrug(@Param("drugName") String drugName);
 
 
+
+
+    @Query(value = "SELECT DISTINCT d.id, d.name, d.bmdc " +
+            "FROM prescriptions p " +
+            "         JOIN locations dis on p.location_id = dis.id " +
+            "         JOIN divisions divi on divi.id = dis.division_id " +
+            "         JOIN doctors d on d.id = p.doctor_id " +
+            "         JOIN prescription_drugs dp on p.id = dp.prescription_id " +
+            "         JOIN drugs dr on dr.id = dp.drug_id " +
+            "WHERE divi.name = :divisionName AND dr.drug_name = :drugName", nativeQuery = true)
+    List<Doctor> findDoctorsByDivisionAndDrug(@Param("divisionName") String divisionName, @Param("drugName") String drugName);
+
+
 }

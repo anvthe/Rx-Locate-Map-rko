@@ -2,6 +2,7 @@ package com.rko.springsecurity.service;
 
 import com.rko.springsecurity.domain.Drug;
 import com.rko.springsecurity.dto.DrugDTO;
+import com.rko.springsecurity.dto.DrugDetailsDTO;
 import com.rko.springsecurity.repository.DrugRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,10 @@ public class DrugService {
         return drugOptional.orElse(null);
     }
 
-    public List<DrugDTO> getAllDrugs() {
+    public List<DrugDetailsDTO> getAllDrugs() {
         return drugRepository.findAll()
                 .stream()
-                .map(drug -> new DrugDTO(drug.getName()))
+                .map(drug -> new DrugDetailsDTO(drug.getName(), drug.getFormula(), drug.getStrength()))
                 .toList();
     }
 

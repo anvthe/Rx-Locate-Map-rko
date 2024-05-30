@@ -20,14 +20,17 @@ public class Drug {
     @NotBlank
     private String name;
 
-    private String description;
+    private String formula;
 
-    @ManyToOne
-    @JoinColumn(name = "vendor_id")
-    private Vendor vendor;
+    private String strength;
 
     @ManyToOne
     @JoinColumn(name = "generic_id")
     private Generic generic;
+
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
+    private Vendor vendor;
 
 }
