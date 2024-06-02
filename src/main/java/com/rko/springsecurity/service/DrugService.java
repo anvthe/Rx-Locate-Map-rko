@@ -25,15 +25,21 @@ public class DrugService {
         return drugOptional.orElse(null);
     }
 
-    public List<DrugDetailsDTO> getAllDrugs() {
+
+    public List<DrugDTO> getAllDrugs() {
         return drugRepository.findAll()
                 .stream()
-                .map(drug -> new DrugDetailsDTO(drug.getName(), drug.getFormula(), drug.getStrength()))
+                .map(drug -> new DrugDTO(drug.getName(), drug.getFormula(), drug.getStrength()))
                 .toList();
     }
 
 
-    public Optional<Drug> fetchDrugByName(String name) {
-        return drugRepository.findByName(name);
+
+
+
+    public DrugDetailsDTO fetchDrugInfoByName(String name) {
+        return drugRepository.fetchDrugInfoByName(name);
     }
+
+
 }

@@ -29,6 +29,7 @@ public class Doctor {
     private String bmdcNo;
 
 
+
     @OneToMany(mappedBy = "doctor", fetch = FetchType.EAGER)
     private Set<Prescription> prescriptions;
 

@@ -43,7 +43,7 @@ public class PrescriptionDTO {
         }
 
         List<DrugDTO> drugDTOs = prescription.getDrugs().stream()
-                .map(drug -> new DrugDTO(drug.getName()))
+                .map(drug -> new DrugDTO(drug.getName(), drug.getFormula(), drug.getStrength()))
                 .collect(Collectors.toList());
 
         return new PrescriptionDTO(

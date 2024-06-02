@@ -26,18 +26,27 @@ public class DrugController {
 
 
     @GetMapping("/drug-list")
-    public List<DrugDetailsDTO> getAllDrugs() {
+    public List<DrugDTO> getAllDrugs() {
         return searchService.getAllDrugs();
 
     }
 
-    @GetMapping("/name/{drugName}")
+
+
+/*    @GetMapping("/name/{drugName}")
     public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
 
-        Drug drug = drugService.fetchDrugByName(drugName).orElseThrow(IllegalAccessError::new);
+        DrugDetailsDTO drug = drugService.fetchDrugInfoByName(drugName);
         DrugDetailsDTO detailsDTO = DrugDetailsDTO.from(drug);
 
         return ResponseEntity.ok(detailsDTO);
+    }*/
+
+
+    @GetMapping("/drug-info/{drugName}")
+    public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
+        DrugDetailsDTO drug = drugService.fetchDrugInfoByName(drugName);
+        return ResponseEntity.ok(drug);
     }
 
 }

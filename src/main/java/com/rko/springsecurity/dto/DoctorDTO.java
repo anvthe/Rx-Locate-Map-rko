@@ -4,7 +4,6 @@ import com.rko.springsecurity.domain.Doctor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.ResponseEntity;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +12,10 @@ public class DoctorDTO {
 
     private String name;
 
-    private String bmdcNo;
+    private String bmdc;
+
+
+
 
     public static DoctorDTO from(Doctor doctor) {
         if (doctor == null) {
@@ -23,8 +25,4 @@ public class DoctorDTO {
 
     }
 
-   /* public static ResponseEntity<DoctorDTO> toResponseEntity(Optional<Doctor> optionalDoctor) {
-        return optionalDoctor
-                .map(doctor -> ResponseEntity.ok(DoctorDTO.from(doctor)))
-                .orElse(ResponseEntity.notFound().build());*/
     }

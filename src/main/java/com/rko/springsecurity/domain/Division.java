@@ -18,7 +18,7 @@ public class Division {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   private String name;
+    private String name;
 
     private double lat;
 

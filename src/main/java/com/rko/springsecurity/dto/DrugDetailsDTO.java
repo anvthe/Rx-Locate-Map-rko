@@ -1,6 +1,5 @@
 package com.rko.springsecurity.dto;
 
-import com.rko.springsecurity.domain.Drug;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,19 +9,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DrugDetailsDTO {
 
-    private String name;
+    private String drugName;
 
-    private String formula;
+    private String drugFormation;
 
-    private String strength;
+    private String drugStrength;
+
+    private String generic;
+
+    private String vendor;
 
 
-    public static DrugDetailsDTO from(Drug drug) {
+
+
+/*    public static DrugDetailsDTO from(DrugDetailsDTO drug) {
 
         DrugDetailsDTO detailsDTO = new DrugDetailsDTO();
         detailsDTO.name = drug.getName();
-        detailsDTO.formula = drug.getFormula();
-        detailsDTO.strength = drug.getStrength();
+        detailsDTO.drugFormation = drug.getDrugFormation();
+        detailsDTO.drugStrength = drug.getDrugStrength();
+        detailsDTO.generic = drug.getGeneric();
+        detailsDTO.vendor = drug.getVendor();
         return detailsDTO;
-    }
+    }*/
 }

@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 public class DrugDTO {
 
     private String name;
+    private String formula;
+    private String strength;
 
 
 

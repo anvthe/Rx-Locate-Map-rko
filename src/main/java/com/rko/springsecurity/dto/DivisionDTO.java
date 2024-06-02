@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DivisionDTO {
 
+    private Long divisionId;
+
     private String divisionName;
 
     private String drugName;

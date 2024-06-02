@@ -5,7 +5,6 @@ import com.rko.springsecurity.dto.LocationDTO;
 import com.rko.springsecurity.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rko.springsecurity.domain.Division;
 
 import java.util.List;
 import java.util.Optional;

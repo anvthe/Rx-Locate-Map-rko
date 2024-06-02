@@ -2,14 +2,8 @@ package com.rko.springsecurity.dto;
 
 
 
-public interface DivisionFileProjection {
+public interface DivisionPrescriptionProjection {
     
-    String divisionName();
-    
-    String drugName();
-    
-    Long prescriptionCount();
-
 
     String getDivisionName();
 

@@ -9,9 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AreaDTO {
 
+        private Long districtId;
+
         private String divisionName;
 
         private String districtName;
+
+        private String drugName;
 
         private long prescriptionCount;
 

@@ -1,10 +1,8 @@
 package com.rko.springsecurity.repository;
 
 import com.rko.springsecurity.domain.Prescription;
-import com.rko.springsecurity.dto.AreaDTO;
+import com.rko.springsecurity.dto.*;
 
-import com.rko.springsecurity.dto.DivisionDTO;
-import com.rko.springsecurity.dto.LocationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,7 +29,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
     List<LocationDTO> findPrescriptionSummariesByLocationName(@Param("locationName") String locationName);
 
 
-    @Query("SELECT new com.rko.springsecurity.dto.DivisionDTO(d.name, dr.name, COUNT(p), d.lat, d.lng) " +
+    @Query("SELECT new com.rko.springsecurity.dto.DivisionDTO(d.id, d.name, dr.name, COUNT(p), d.lat, d.lng) " +
             "FROM Prescription p " +
             "JOIN p.location l " +
             "JOIN l.division d " +
@@ -56,7 +54,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
 
 
 
-    @Query("SELECT new com.rko.springsecurity.dto.AreaDTO(d.name, l.name, COUNT(p), l.lat, l.lng) " +
+    @Query("SELECT new com.rko.springsecurity.dto.AreaDTO(d.id, d.name, l.name, dr.name, COUNT(p), l.lat, l.lng) " +
             "FROM Prescription p " +
             "JOIN p.location l " +
             "JOIN l.division d " +
@@ -65,6 +63,49 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
             "GROUP BY l.name, l.lat, l.lng")
 
     Page<AreaDTO> findLocationsByDivisionAndDrugName(@Param("drugName") String drugName, @Param("divisionName") String divisionNam, Pageable pageable);
+
+
+
+
+
+
+
+
+    @Query(value = "SELECT " +
+            "    divi.name AS divisionName, " +
+            "    COUNT(DISTINCT p.id) AS prescriptionCount, " +
+            "    dr.drug_name as drugName " +
+            "FROM prescriptions p " +
+            "JOIN locations l ON p.location_id = l.id " +
+            "JOIN prescription_drugs dp ON p.id = dp.prescription_id " +
+            "JOIN drugs dr ON dr.id = dp.drug_id " +
+            "JOIN divisions divi ON l.division_id = divi.id " +
+
+            "WHERE dr.drug_name = :drugName " +
+            "GROUP BY l.division_id, divi.name", nativeQuery = true)
+
+    List<DivisionPrescriptionProjection> excelDataByDrugName(@Param("drugName") String drugName);
+
+
+
+    @Query(value = "SELECT " +
+            "    l.location_name AS districtName, " +
+            "    COUNT(DISTINCT p.id) AS prescriptionCount " +
+            "FROM prescriptions p " +
+            "JOIN locations l ON p.location_id = l.id " +
+            "JOIN prescription_drugs pd ON p.id = pd.prescription_id " +
+            "JOIN drugs dr ON dr.id = pd.drug_id " +
+            "JOIN divisions divi ON l.division_id = divi.id " +
+            "WHERE dr.drug_name = :drugName  AND divi.name = :divisionName  " +
+            "GROUP BY l.id, l.location_name", nativeQuery = true)
+    List<DistrictPrescriptionProjection> excelDataByDrugNameAndDivisionName(@Param("drugName") String drugName, @Param("divisionName") String divisionName);
+
+
+
+
+
+
+
 }
 
 
