@@ -1,4 +1,3 @@
-
 package com.rko.springsecurity.controller;
 
 import com.rko.springsecurity.service.ExcelService;
@@ -35,7 +34,8 @@ public class ExcelController {
     }
 
     @GetMapping("/district-data/{drugName}/{divisionName}")
-    public ResponseEntity<Resource> downloadExcelForDistrict(@PathVariable String drugName, @PathVariable String divisionName) {
+    public ResponseEntity<Resource> downloadExcelForDistrict(@PathVariable String drugName,
+                                                             @PathVariable String divisionName) {
         String fileName = "overview-district.xlsx";
         ByteArrayInputStream data = excelService.getExcelDataForDistrict(drugName, divisionName);
         InputStreamResource file = new InputStreamResource(data);
@@ -44,7 +44,5 @@ public class ExcelController {
                 .header("Content-Disposition", "attachment; filename=" + fileName)
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(file);
-
     }
 }
-

@@ -29,7 +29,6 @@ public class Prescription {
     @JoinColumn(name = "location_id")
     private Location location;
 
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "prescription_drugs",

@@ -27,7 +27,6 @@ public class Patient {
     @NotBlank
     private int age;
 
-
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private Set<Prescription> prescriptions;
 

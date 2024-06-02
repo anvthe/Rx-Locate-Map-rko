@@ -29,5 +29,4 @@ public class PrescriptionController {
     public PrescriptionDTO getPrescriptionDetails(@PathVariable Long id) {
         return prescriptionService.getPrescriptionDetailsByRxNumber(id);
     }
-
 }

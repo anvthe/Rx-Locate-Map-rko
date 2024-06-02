@@ -14,15 +14,10 @@ public class DoctorDTO {
 
     private String bmdc;
 
-
-
-
     public static DoctorDTO from(Doctor doctor) {
         if (doctor == null) {
             return null;
         }
         return new DoctorDTO(doctor.getName(), doctor.getBmdcNo());
-
     }
-
-    }
+}

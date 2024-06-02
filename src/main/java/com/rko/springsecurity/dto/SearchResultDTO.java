@@ -1,12 +1,8 @@
 package com.rko.springsecurity.dto;
 
-
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @AllArgsConstructor
@@ -22,5 +18,4 @@ public class SearchResultDTO {
     private double locationLat;
 
     private double locationLng;
-
 }

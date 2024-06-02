@@ -8,18 +8,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AreaDTO {
+    private Long districtId;
 
-        private Long districtId;
+    private String divisionName;
 
-        private String divisionName;
+    private String districtName;
 
-        private String districtName;
+    private String drugName;
 
-        private String drugName;
+    private long prescriptionCount;
 
-        private long prescriptionCount;
+    private double lat;
 
-        private double lat;
-
-        private double lng;
-    }
+    private double lng;
+}

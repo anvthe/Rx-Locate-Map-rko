@@ -48,7 +48,6 @@ public interface DrugRepository extends JpaRepository<Drug, Long> {
             "LEFT JOIN dr.vendor v " +
             "LEFT JOIN dr.generic g " +
             "WHERE dr.name = :drugName")
-
     DrugDetailsDTO fetchDrugInfoByName(@Param("drugName") String drugName);
 }
 

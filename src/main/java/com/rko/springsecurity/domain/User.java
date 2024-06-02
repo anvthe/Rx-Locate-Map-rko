@@ -24,7 +24,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String firstname;
 
     private String lastname;
@@ -32,7 +31,6 @@ public class User implements UserDetails {
     @Column(unique = true)
     @NotBlank(message = "Username must be")
     private String username;
-
 
     @NotBlank(message = "Username must be")
     private String password;
@@ -74,6 +72,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
 }

@@ -18,28 +18,17 @@ public class DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
-/*    public Optional<Doctor> findDoctorByBmdc(String bmdcNo) {
+    public Optional<Doctor> findDoctorByBmdc(String bmdcNo) {
         return doctorRepository.findByBmdcNo(bmdcNo);
-    }*/
-
-    public DoctorDTO findDoctorByBmdc(String bmdcNo) {
-        Optional<Doctor> doctor = doctorRepository.findByBmdcNo(bmdcNo);
-        return doctor.map(DoctorDTO::from).orElse(null);
     }
-
 
     public List<DoctorDTO> getAllDoctorsByLocation(String locationName) {
         List<Doctor> doctors = doctorRepository.findDoctorsByLocation(locationName);
-        return doctors.stream()
-                .map(doctor -> new DoctorDTO(doctor.getName(), doctor.getBmdcNo()))
-                .collect(Collectors.toList());
+        return doctors.stream().map(DoctorDTO::from).toList();
     }
 
-
-        public List<DoctorDTO> getDoctorsByDivisionAndDrug(String divisionName, String drugName) {
-            List<Doctor> doctors = doctorRepository.findDoctorsByDivisionAndDrug(divisionName, drugName);
-            return doctors.stream()
-                    .map(DoctorDTO::from)
-                    .collect(Collectors.toList());
-        }
+    public List<DoctorDTO> getDoctorsByDivisionAndDrug(String divisionName, String drugName) {
+        List<Doctor> doctors = doctorRepository.findDoctorsByDivisionAndDrug(divisionName, drugName);
+        return doctors.stream().map(DoctorDTO::from).toList();
     }
+}

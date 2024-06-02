@@ -1,11 +1,11 @@
 package com.rko.springsecurity.controller;
 
-import com.rko.springsecurity.domain.Drug;
 import com.rko.springsecurity.dto.DrugDTO;
 import com.rko.springsecurity.dto.DrugDetailsDTO;
 import com.rko.springsecurity.service.DrugService;
 import com.rko.springsecurity.service.SearchService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,45 +16,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/drug")
+@RequiredArgsConstructor
 public class DrugController {
 
-    @Autowired
-    private SearchService searchService;
+    private final SearchService searchService;
 
-    @Autowired
-    private DrugService drugService;
-
+    private final DrugService drugService;
 
     @GetMapping("/drug-list")
-    public List<DrugDTO> getAllDrugs() {
-        return searchService.getAllDrugs();
-
+    public ResponseEntity<List<DrugDTO>> getAllDrugs() {
+        return new ResponseEntity<>(drugService.getAllDrugs(), HttpStatus.OK);
     }
-
 
     @GetMapping("/drug-info/{drugName}")
     public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
         DrugDetailsDTO drug = drugService.fetchDrugInfoByName(drugName);
         return ResponseEntity.ok(drug);
     }
-
-
-
-
-
-
-
-
-
-/*    @GetMapping("/name/{drugName}")
-    public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
-
-        DrugDetailsDTO drug = drugService.fetchDrugInfoByName(drugName);
-        DrugDetailsDTO detailsDTO = DrugDetailsDTO.from(drug);
-
-        return ResponseEntity.ok(detailsDTO);
-    }*/
-
-
 
 }

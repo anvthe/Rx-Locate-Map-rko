@@ -1,10 +1,14 @@
 package com.rko.springsecurity.controller;
 
-import com.rko.springsecurity.dto.*;
+import com.rko.springsecurity.domain.Drug;
+import com.rko.springsecurity.domain.Location;
+import com.rko.springsecurity.dto.AreaDTO;
+import com.rko.springsecurity.dto.DivisionDTO;
+import com.rko.springsecurity.dto.SearchResultDTO;
+import com.rko.springsecurity.service.DrugService;
+import com.rko.springsecurity.service.LocationService;
 import com.rko.springsecurity.service.SearchService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,31 +17,32 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/map")
+@RequiredArgsConstructor
 public class SearchController {
-    @Autowired
-    private SearchService searchService;
 
+    private final SearchService searchService;
+
+    private final LocationService locationService;
+
+    private final DrugService drugService;
 
     @GetMapping("/{locationName}/{drugName}")
-    public ResponseEntity<?> search(
-            @PathVariable("locationName") String locationName,
-            @PathVariable("drugName") String drugName) {
-        try {
-            SearchResultDTO result = searchService.searchDrugNameByLocationName(locationName, drugName);
-            return ResponseEntity.ok(result);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    public ResponseEntity<?> search(@PathVariable("locationName") String locationName,
+                                    @PathVariable("drugName") String drugName) {
+        Location location = locationService.getLocationByName(locationName).orElseThrow(NoSuchElementException::new);
+
+        Drug drug = drugService.findByName(drugName).orElseThrow(NoSuchElementException::new);
+
+        SearchResultDTO result = searchService.searchDrugNameByLocationName(location, drug);
+
+        return ResponseEntity.ok(result);
     }
 
-
-
     @GetMapping("/id")
-    public ResponseEntity<SearchResultDTO> search(@RequestParam Long locationId, @RequestParam Long drugId) {
+    public ResponseEntity<SearchResultDTO> search(@RequestParam Long locationId,
+                                                  @RequestParam Long drugId) {
         SearchResultDTO result = searchService.searchByDrugIdAndLocationId(locationId, drugId);
-        if (result == null) {
-            return ResponseEntity.notFound().build();
-        }
+
         return ResponseEntity.ok(result);
     }
 
@@ -49,54 +54,17 @@ public class SearchController {
     @GetMapping("/{drugName}")
     public ResponseEntity<?> getDivisionsByDrugName(@PathVariable String drugName) {
         List<DivisionDTO> divisions = searchService.getDivisionsByDrugName(drugName);
+
         return ResponseEntity.ok(divisions);
     }
 
-
-
-
     @GetMapping("/select/{drugName}/{divisionName}")
-    public ResponseEntity<?> getLocationsByDivisionAndDrugName(
-            @PathVariable String drugName,
-            @PathVariable String divisionName,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        List<AreaDTO> locations = searchService.getLocationsByDivisionAndDrugName(drugName, divisionName, page, size, Sort.by("prescriptionCount").descending()).getContent();
+    public ResponseEntity<?> getLocationsByDivisionAndDrugName(@PathVariable String drugName,
+                                                               @PathVariable String divisionName,
+                                                               @RequestParam(defaultValue = "0") int page,
+                                                               @RequestParam(defaultValue = "10") int size) {
+        List<AreaDTO> locations = searchService.getLocationsByDivisionAndDrugName(drugName, divisionName, page, size).getContent();
+
         return ResponseEntity.ok(locations);
     }
-
-
-
-
-
-
-
-
-
-
-
-/*
-    @GetMapping("/list-divisions")
-    public List<String> getAllDivisions() {
-        return Arrays.stream(Division.values()).map(Division::getLabel).toList();
-    }
-
-
-
-
-
-    @GetMapping("/{division}")
-    public List<LocationDTO> getAllDivisionLocations(@PathVariable String division) {
-        return searchService.getDivisionLocations(division);
-    }
-*/
-
-
-
-
-
-
-
-
-
 }

@@ -20,22 +20,12 @@ public class PrescriptionService {
         return prescriptionRepository.countUsersByDrugNameAndLocationName(drugName, locationName);
     }
 
-    public int countUsersByDrugIdAndLocationId(Long drugId, Long locationId) {
-        return prescriptionRepository.countUsersByDrugIdAndLocationId(drugId, locationId);
-    }
-
-
-
-
     public List<LocationDTO> searchPrescriptionsByArea(String locationName) {
         return prescriptionRepository.findPrescriptionSummariesByLocationName(locationName);
     }
-
 
     public PrescriptionDTO getPrescriptionDetailsByRxNumber(Long prescriptionId) {
         Optional<Prescription> prescription = prescriptionRepository.findById(prescriptionId);
         return prescription.map(PrescriptionDTO::from).orElse(null);
     }
-
-
 }

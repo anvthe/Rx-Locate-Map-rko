@@ -15,8 +15,6 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
     @Column(name = "location_name", unique = true)
     private String name;
 
@@ -29,7 +27,6 @@ public class Location {
     @ManyToOne
     @JoinColumn(name = "division_id")
     private Division division;
-
 
     @OneToMany(mappedBy = "location")
     private Set<Prescription> prescriptions;
