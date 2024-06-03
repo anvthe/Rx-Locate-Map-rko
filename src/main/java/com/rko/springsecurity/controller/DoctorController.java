@@ -46,7 +46,7 @@ public class DoctorController {
 
 
 
-        @GetMapping("/doctor-list-by-drug/{divisionName}/{drugName}")
+        @GetMapping("/doctor-list-by-division-drug/{divisionName}/{drugName}")
         public ResponseEntity<List<DoctorDTO>> getDoctorsByDivisionAndDrug(@PathVariable String divisionName, @PathVariable String drugName) {
             List<DoctorDTO> doctorDTOS = doctorService.getDoctorsByDivisionAndDrug(divisionName, drugName);
             return ResponseEntity.ok(doctorDTOS);
@@ -56,7 +56,7 @@ public class DoctorController {
 
 
 
-    @GetMapping("/doctor-list-by-drug/{drugName}")
+    @GetMapping("/doctor-division-list-by-drug/{drugName}")
     public ResponseEntity<List<DoctorDivisionProjection>> getDoctorsByDrug(@PathVariable String drugName) {
         List<DoctorDivisionProjection> doctors = doctorRepository.findDoctorsWithDivisionByDrug(drugName);
         return ResponseEntity.ok(doctors);

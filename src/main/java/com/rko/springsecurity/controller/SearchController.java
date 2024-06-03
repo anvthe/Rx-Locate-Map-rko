@@ -46,6 +46,29 @@ public class SearchController {
 
 
 
+    @GetMapping("/{drugName}")
+    public ResponseEntity<?> getDivisionsByDrugName(@PathVariable String drugName) {
+        List<DivisionDTO> divisions = searchService.getDivisionsByDrugName(drugName);
+        return ResponseEntity.ok(divisions);
+    }
+
+
+
+
+    @GetMapping("/select/{drugName}/{divisionName}")
+    public ResponseEntity<?> getLocationsByDivisionAndDrugName(
+            @PathVariable String drugName,
+            @PathVariable String divisionName,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        List<AreaDTO> locations = searchService.getLocationsByDivisionAndDrugName(drugName, divisionName, page, size, Sort.by("prescriptionCount").descending()).getContent();
+        return ResponseEntity.ok(locations);
+    }
+
+
+
+
+
 
 
 
@@ -74,24 +97,6 @@ public class SearchController {
 
 
 
-    @GetMapping("/{drugName}")
-    public ResponseEntity<?> getDivisionsByDrugName(@PathVariable String drugName) {
-        List<DivisionDTO> divisions = searchService.getDivisionsByDrugName(drugName);
-        return ResponseEntity.ok(divisions);
-    }
-
-
-
-
-@GetMapping("/select/{drugName}/{divisionName}")
-    public ResponseEntity<?> getLocationsByDivisionAndDrugName(
-            @PathVariable String drugName,
-            @PathVariable String divisionName,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        List<AreaDTO> locations = searchService.getLocationsByDivisionAndDrugName(drugName, divisionName, page, size, Sort.by("prescriptionCount").descending()).getContent();
-        return ResponseEntity.ok(locations);
-    }
 
 
 }

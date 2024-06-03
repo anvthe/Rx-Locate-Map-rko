@@ -32,6 +32,19 @@ public class DrugController {
     }
 
 
+    @GetMapping("/drug-info/{drugName}")
+    public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
+        DrugDetailsDTO drug = drugService.fetchDrugInfoByName(drugName);
+        return ResponseEntity.ok(drug);
+    }
+
+
+
+
+
+
+
+
 
 /*    @GetMapping("/name/{drugName}")
     public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
@@ -43,10 +56,5 @@ public class DrugController {
     }*/
 
 
-    @GetMapping("/drug-info/{drugName}")
-    public ResponseEntity<DrugDetailsDTO> getDrugByName(@PathVariable String drugName) {
-        DrugDetailsDTO drug = drugService.fetchDrugInfoByName(drugName);
-        return ResponseEntity.ok(drug);
-    }
 
 }
